@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "a4678b0b-b8e3-44cf-a449-2b0ad1a53053",
+		"name": "PA - GIT Integration Part 1 Push Process",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Init GIT",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "apple",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "CAMNamespace c3R1YXJ0OnBhc3N3b3JkOkNKUA==",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"URL\":\"https://github.com/your-Github-ID/SampleRepository.git\",\r\n    \"Deployment\":\"Sample\",\r\n    \"Force\": true,\r\n    \"Username\":\"{{gituser}}\",\r\n    \"Password\":\"{{gitpassword}}\"\r\n}\r\n",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:httpPortNumber/api/v1/GitInit",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "httpPortNumber",
+					"path": [
+						"api",
+						"v1",
+						"GitInit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status - -Optional",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "apple",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "CAMNamespace c3R1YXJ0OnBhc3N3b3JkOkNKUA==",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\":\"{{gituser}}\",\r\n    \"Password\":\"{{gitpassword}}\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://localhost:httpPortNumber/api/v1/GitStatus",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "httpPortNumber",
+					"path": [
+						"api",
+						"v1",
+						"GitStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create !TM1Project",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "apple",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "CAMNamespace c3R1YXJ0OnBhc3N3b3JkOkNKUA==",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Version\": \"1.0\"\n        \n}"
+				},
+				"url": {
+					"raw": "https://localhost:httpPortNumber/api/v1/!tm1project",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "httpPortNumber",
+					"path": [
+						"api",
+						"v1",
+						"!tm1project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read  !TM1Project  --Optional",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "apple",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "CAMNamespace c3R1YXJ0OnBhc3N3b3JkOkNKUA==",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Version\": \"1.0\",\n    \"Tasks\":\n    {\n        \"ImportData\":\n        {\n            \"Process\": \"Processes('}src_sync')\",\n            \"Parameters\": [ { \"Name\": \"op\", \"Value\": \"1\" } ]\n        },\n        \"ExportData\":\n        {\n            \"Process\": \"Processes('}src_sync')\",\n            \"Parameters\": [ { \"Name\": \"op\", \"Value\": \"0\" } ]\n        }\n    },\n    \"PostPull\":\n    [ \n        \"Tasks('ImportData')\"\n    ],\n    \"PrePush\":\n    [ \n        \"Tasks('ExportData')\"\n    ],\n    \"Files\":\n    [\n        \"}Externals/*\"   \n    ],\n    \"Ignore\":\n    [\n      \n    ]\n}"
+				},
+				"url": {
+					"raw": "https://localhost:httpPortNumber/api/v1/!tm1project",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "httpPortNumber",
+					"path": [
+						"api",
+						"v1",
+						"!tm1project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Push - Step 0 - CreateNewBranch",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "apple",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "CAMNamespace c3R1YXJ0OnBhc3N3b3JkOkNKUA==",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"NewBranch\":\"sample_branch\",\r\n    \"Message\":\"BranchforDemo\",\r\n    \"Author\":\"John Smith\",\r\n    \"Email\":\"{{gituser}}\",\r\n    \"Username\":\"{{gituser}}\",\r\n    \"Password\":\"{{gitpassword}}\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://localhost:httpport/api/v1/GitPush",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "httpport",
+					"path": [
+						"api",
+						"v1",
+						"GitPush"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Push - Step 1",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "apple",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "CAMNamespace c3R1YXJ0OnBhc3N3b3JkOkNKUA==",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \r\n    \"Branch\":\"sample_branch\",\r\n    \"Message\":\"UpdateforDay1\",\r\n    \"Author\":\"John Smith\",\r\n    \"Email\":\"{{gituser}}\",\r\n    \"Username\":\"{{gituser}}\",\r\n    \"Password\":\"{{gitpassword}}\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://localhost:httpport/api/v1/GitPush",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "httpport",
+					"path": [
+						"api",
+						"v1",
+						"GitPush"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Push - Step 2",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "apple",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "CAMNamespace c3R1YXJ0OnBhc3N3b3JkOkNKUA==",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:httpport/api/v1/GitPlans('sessionid')/tm1.Execute",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "httpport",
+					"path": [
+						"api",
+						"v1",
+						"GitPlans('sessionid')",
+						"tm1.Execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Uninit GIT ",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "apple",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "CAMNamespace c3R1YXJ0OnBhc3N3b3JkOkNKUA==",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:httpport/api/v1/GitUninit",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "httpport",
+					"path": [
+						"api",
+						"v1",
+						"GitUninit"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7b32de3b-7d61-4357-83a2-05efadd929cf",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f89f896d-b8a6-4488-8a5b-69796162d341",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
